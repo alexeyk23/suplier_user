@@ -1,0 +1,8 @@
+c:\users\администратор\documents\visual studio 2012\Projects\supplier_user\supplier_user\bin\Debug\supplier_user.exe
+c:\users\администратор\documents\visual studio 2012\Projects\supplier_user\supplier_user\bin\Debug\supplier_user.pdb
+c:\users\администратор\documents\visual studio 2012\Projects\supplier_user\supplier_user\obj\Debug\supplier_user.csprojResolveAssemblyReference.cache
+c:\users\администратор\documents\visual studio 2012\Projects\supplier_user\supplier_user\obj\Debug\supplier_user.Form1.resources
+c:\users\администратор\documents\visual studio 2012\Projects\supplier_user\supplier_user\obj\Debug\supplier_user.Properties.Resources.resources
+c:\users\администратор\documents\visual studio 2012\Projects\supplier_user\supplier_user\obj\Debug\supplier_user.csproj.GenerateResource.Cache
+c:\users\администратор\documents\visual studio 2012\Projects\supplier_user\supplier_user\obj\Debug\supplier_user.exe
+c:\users\администратор\documents\visual studio 2012\Projects\supplier_user\supplier_user\obj\Debug\supplier_user.pdb
