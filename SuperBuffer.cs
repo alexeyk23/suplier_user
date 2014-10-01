@@ -10,7 +10,7 @@ namespace supplier_user
     {
         Queue<int> buf = new Queue<int>();
         Semaphore semReader;
-        int countReader;
+        int countReader;//количество читателей
         int sizeBuffer;
         Mutex mut;
         DataGridView dgv;
@@ -48,15 +48,25 @@ namespace supplier_user
         //попробуй положить (для поставщика)
         public void Push() 
         {
-            Random r = new Random();
-            int a = r.Next(123);
+            
             object[] values = new object[3];
             mut.WaitOne();
             values[2] = "";            
             if (buf.Count != sizeBuffer)
-            {                    
-                buf.Enqueue(a);
-                values[0] ="Писатель положил "+ a.ToString();
+            {
+                Random r = new Random();                   
+                //поставщик кладет случайное колмичество 
+                int n = r.Next(sizeBuffer - buf.Count);
+                n = n == 0 ? 1 : n;
+                values[0] = "Писатель положил ";
+                while (n>0)
+                {
+                    int a = r.Next(100);
+                    buf.Enqueue(a);
+                    n--;
+                    values[0]+= a.ToString()+" ";
+                }
+               
             }
             else            
                 values[0] = "Писатель ничего не положил";

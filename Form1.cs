@@ -18,7 +18,7 @@ namespace supplier_user
         }
         int countReader = 5;
         Random r = new Random();
-        int size = 5;
+        int size = 5;//размер буфера
         bool go = true;
         private void btnGO_Click(object sender, EventArgs e)
         {
@@ -43,7 +43,6 @@ namespace supplier_user
                     readers[i] = new Thread(buf.Pop);
                     readers[i].Name = "Читатель # " + i.ToString();
                     readers[i].Start();
-
                 }
                 Thread.Sleep(500);
                 Application.DoEvents();
@@ -54,10 +53,9 @@ namespace supplier_user
         {
             go= false;
         }
-
+        //прокрутка в конец датагрида
         private void dgvAct_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-
             dgvAct.FirstDisplayedScrollingRowIndex = dgvAct.Rows.Count - 1;
         }
 
