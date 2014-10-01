@@ -15,16 +15,23 @@ namespace supplier_user
         {
             InitializeComponent();
             Control.CheckForIllegalCrossThreadCalls = false;
-
         }
         int countReader = 5;
         Random r = new Random();
         int size = 5;
+        bool go = true;
         private void btnGO_Click(object sender, EventArgs e)
         {
-            SuperBuffer buf = new SuperBuffer(countReader,size,dgvAct);
+            Thread main = new Thread(run);
+            main.Start();
+        }
+        void run()
+        {
+            SuperBuffer buf = new SuperBuffer(countReader, size, dgvAct);
             int w = 20;
-            while (w>0)
+            go = true;
+            dgvAct.Rows.Clear();
+            while (go)
             {
                 Thread writer = new Thread(buf.Push);
                 writer.Start();
@@ -36,10 +43,23 @@ namespace supplier_user
                     readers[i] = new Thread(buf.Pop);
                     readers[i].Name = "Читатель # " + i.ToString();
                     readers[i].Start();
+
                 }
+                Thread.Sleep(500);
                 Application.DoEvents();
                 w--;
-            }                     
+            }        
         }
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            go= false;
+        }
+
+        private void dgvAct_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+
+            dgvAct.FirstDisplayedScrollingRowIndex = dgvAct.Rows.Count - 1;
+        }
+
     }
 }

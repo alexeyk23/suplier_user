@@ -6,3 +6,11 @@ c:\users\администратор\documents\visual studio 2012\Projects\suppli
 c:\users\администратор\documents\visual studio 2012\Projects\supplier_user\supplier_user\obj\Debug\supplier_user.csproj.GenerateResource.Cache
 c:\users\администратор\documents\visual studio 2012\Projects\supplier_user\supplier_user\obj\Debug\supplier_user.exe
 c:\users\администратор\documents\visual studio 2012\Projects\supplier_user\supplier_user\obj\Debug\supplier_user.pdb
+C:\Users\trebushet\Documents\Visual Studio 2012\Projects\suplier_user\obj\Debug\supplier_user.exe
+C:\Users\trebushet\Documents\Visual Studio 2012\Projects\suplier_user\obj\Debug\supplier_user.pdb
+C:\Users\trebushet\Documents\Visual Studio 2012\Projects\suplier_user\bin\Debug\supplier_user.exe
+C:\Users\trebushet\Documents\Visual Studio 2012\Projects\suplier_user\bin\Debug\supplier_user.pdb
+C:\Users\trebushet\Documents\Visual Studio 2012\Projects\suplier_user\obj\Debug\supplier_user.csprojResolveAssemblyReference.cache
+C:\Users\trebushet\Documents\Visual Studio 2012\Projects\suplier_user\obj\Debug\supplier_user.Form1.resources
+C:\Users\trebushet\Documents\Visual Studio 2012\Projects\suplier_user\obj\Debug\supplier_user.Properties.Resources.resources
+C:\Users\trebushet\Documents\Visual Studio 2012\Projects\suplier_user\obj\Debug\supplier_user.csproj.GenerateResource.Cache

@@ -33,6 +33,8 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.btnStop = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAct)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,8 +61,10 @@
             this.dgvAct.Location = new System.Drawing.Point(94, 13);
             this.dgvAct.Name = "dgvAct";
             this.dgvAct.ReadOnly = true;
+            this.dgvAct.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvAct.Size = new System.Drawing.Size(668, 266);
             this.dgvAct.TabIndex = 1;
+            this.dgvAct.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvAct_RowsAdded);
             // 
             // Column1
             // 
@@ -80,11 +84,22 @@
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
             // 
+            // btnStop
+            // 
+            this.btnStop.Location = new System.Drawing.Point(13, 42);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(75, 23);
+            this.btnStop.TabIndex = 2;
+            this.btnStop.Text = "Stop";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(837, 365);
+            this.Controls.Add(this.btnStop);
             this.Controls.Add(this.dgvAct);
             this.Controls.Add(this.btnGO);
             this.Name = "Form1";
@@ -101,6 +116,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button btnStop;
     }
 }
 

@@ -22,17 +22,15 @@ namespace supplier_user
             mut = new Mutex();
             this.dgv = dgv;
         }
-        //попробуй взять в res( для потребителя)
+        //попробуй взять ( для потребителя)
         public void Pop()
         {
             object[] values = new object[3];
            
             semReader.WaitOne();//ждать семафора
             mut.WaitOne();//войти в критическую секцию
-
             values[0] = "";
-            StringBuilder sb = new StringBuilder();
-            
+            StringBuilder sb = new StringBuilder();            
             if (buf.Count != 0)                
                 values[2] =Thread.CurrentThread.Name+" взял "+ buf.Dequeue();                
             else                
@@ -54,8 +52,7 @@ namespace supplier_user
             int a = r.Next(123);
             object[] values = new object[3];
             mut.WaitOne();
-            values[2] = "";
-            
+            values[2] = "";            
             if (buf.Count != sizeBuffer)
             {                    
                 buf.Enqueue(a);
