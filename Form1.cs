@@ -15,8 +15,7 @@ namespace supplier_user
         {
             InitializeComponent();
             Control.CheckForIllegalCrossThreadCalls = false;
-        }
-        int countReader = 5;
+        }        
         Random r = new Random();
         int size = 5;//размер буфера
         bool go = true;
@@ -27,8 +26,7 @@ namespace supplier_user
         }
         void run()
         {
-            SuperBuffer buf = new SuperBuffer(countReader, size, dgvAct);
-            int w = 20;
+            SuperBuffer buf = new SuperBuffer(size, dgvAct);
             go = true;
             dgvAct.Rows.Clear();
             while (go)
@@ -36,17 +34,19 @@ namespace supplier_user
                 Thread writer = new Thread(buf.Push);
                 writer.Start();
                 //случайно генерируем читателей 
-                int howmuch = r.Next(countReader);//сколько
-                Thread[] readers = new Thread[countReader];
-                for (int i = 0; i < howmuch; i++)
+                if (r.Next(2) == 0) //в 1/3 случае генерируем читателей
                 {
-                    readers[i] = new Thread(buf.Pop);
-                    readers[i].Name = "Читатель # " + i.ToString();
-                    readers[i].Start();
+                    int howmuch = r.Next(size);//сколько
+                    Thread[] readers = new Thread[size];
+                    for (int i = 0; i < howmuch; i++)
+                    {
+                        readers[i] = new Thread(buf.Pop);
+                        readers[i].Name = "Читатель # " + i.ToString();
+                        readers[i].Start();
+                    }
                 }
                 Thread.Sleep(500);
-                Application.DoEvents();
-                w--;
+                Application.DoEvents();               
             }        
         }
         private void btnStop_Click(object sender, EventArgs e)

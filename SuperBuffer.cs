@@ -9,15 +9,13 @@ namespace supplier_user
     class SuperBuffer
     {
         Queue<int> buf = new Queue<int>();
-        Semaphore semFull;
-        Semaphore semEmpty;
-        int countReader;//количество читателей
+        Semaphore semFull;//семафор потребителей
+        Semaphore semEmpty;//семафор писателей
         int sizeBuffer;
         Mutex mut;
         DataGridView dgv;
-        public SuperBuffer(int countReader,int sizeBuffer, DataGridView dgv)
+        public SuperBuffer(int sizeBuffer, DataGridView dgv)
         {
-            this.countReader = countReader;
             this.sizeBuffer = sizeBuffer;
             semEmpty = new Semaphore(sizeBuffer, sizeBuffer);
             semFull = new Semaphore(0, sizeBuffer);
@@ -27,16 +25,12 @@ namespace supplier_user
         //попробуй взять ( для потребителя)
         public void Pop()
         {
-            object[] values = new object[3];
-           
-            semEmpty.WaitOne();//ждать семафора
+            object[] values = new object[3];           
+            semFull.WaitOne();//ждать семафора
             mut.WaitOne();//войти в критическую секцию
-                values[0] = "";
-                StringBuilder sb = new StringBuilder();            
-                if (buf.Count != 0)                
-                    values[2] =Thread.CurrentThread.Name+" взял "+ buf.Dequeue();                
-                else                
-                    values[2] = Thread.CurrentThread.Name+" не смог взять";
+                values[0] = "";                          
+                values[2] =Thread.CurrentThread.Name+" взял "+ buf.Dequeue();
+                StringBuilder sb = new StringBuilder();
                 foreach (int item in buf)
                 {
                     sb.Append(item + " ");
@@ -44,7 +38,7 @@ namespace supplier_user
                 values[1] = sb.ToString();
                 dgv.Rows.Add(values);            
             mut.ReleaseMutex();
-            semFull.Release();            
+            semEmpty.Release();            
 
         }
         //попробуй положить (для поставщика)
@@ -52,27 +46,13 @@ namespace supplier_user
         {
             
             object[] values = new object[3];
-            semFull.WaitOne();
+            semEmpty.WaitOne();
             mut.WaitOne();
-                values[2] = "";            
-                if (buf.Count != sizeBuffer)
-                {
-                    Random r = new Random();                   
-                    //поставщик кладет случайное колмичество 
-                    int n = r.Next(sizeBuffer - buf.Count);
-                    n = n == 0 ? 1 : n;
-                    values[0] = "Писатель положил ";
-                    while (n>0)
-                    {
-                        int a = r.Next(100);
-                        buf.Enqueue(a);
-                        n--;
-                        values[0]+= a.ToString()+" ";
-                    }
-               
-                }
-                else            
-                    values[0] = "Писатель ничего не положил";
+                values[2] = ""; 
+                Random r = new Random();                      
+                int a = r.Next(100); 
+                buf.Enqueue(a);
+                values[0] = "Писатель положил "+a.ToString();    
                 StringBuilder sb = new StringBuilder();
                 foreach (int item in buf)
                 {
@@ -81,8 +61,7 @@ namespace supplier_user
                 values[1] = sb.ToString();
                 dgv.Rows.Add(values);          
             mut.ReleaseMutex();
-            semEmpty.Release();
-        }
-             
+            semFull.Release();
+        }             
     }
 }

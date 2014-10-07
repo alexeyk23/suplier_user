@@ -103,7 +103,7 @@
             this.Controls.Add(this.dgvAct);
             this.Controls.Add(this.btnGO);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Поставщик-потребитель";
             ((System.ComponentModel.ISupportInitialize)(this.dgvAct)).EndInit();
             this.ResumeLayout(false);
 
