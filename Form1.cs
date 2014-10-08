@@ -13,8 +13,7 @@ namespace supplier_user
     {
         public Form1()
         {
-            InitializeComponent();
-            Control.CheckForIllegalCrossThreadCalls = false;
+            InitializeComponent();           
         }        
         Random r = new Random();
         int size = 5;//размер буфера

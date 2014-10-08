@@ -14,6 +14,7 @@ namespace supplier_user
         int sizeBuffer;
         Mutex mut;
         DataGridView dgv;
+        delegate void AddRowInDgv(object[] values);
         public SuperBuffer(int sizeBuffer, DataGridView dgv)
         {
             this.sizeBuffer = sizeBuffer;
@@ -22,6 +23,7 @@ namespace supplier_user
             mut = new Mutex();
             this.dgv = dgv;
         }
+        
         //попробуй взять ( для потребителя)
         public void Pop()
         {
@@ -36,7 +38,7 @@ namespace supplier_user
                     sb.Append(item + " ");
                 }
                 values[1] = sb.ToString();
-                dgv.Rows.Add(values);            
+                addRow(values);      
             mut.ReleaseMutex();
             semEmpty.Release();            
 
@@ -59,9 +61,20 @@ namespace supplier_user
                     sb.Append(item + " ");
                 }
                 values[1] = sb.ToString();
-                dgv.Rows.Add(values);          
+                addRow(values);            
             mut.ReleaseMutex();
             semFull.Release();
-        }             
+        }
+        //потокобезопасное добавдение в датагрид
+        private void addRow(object[] v)
+        {
+            if (dgv.InvokeRequired)
+            {
+                AddRowInDgv dAdd = new AddRowInDgv(addRow);
+                dgv.Invoke(dAdd, new object[]{v});
+            }
+            else
+                dgv.Rows.Add(v);
+        }
     }
 }
